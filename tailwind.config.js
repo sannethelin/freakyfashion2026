@@ -2,12 +2,11 @@
 module.exports = {
   content: ["./views/*.ejs"],
   theme: {
-    extend: {},
-  },
-  plugins: [
-    {
-      tailwindcss: {},
-      autoprefixer: {},
+    extend: {
+      fontFamily: {
+        custom: ["Verdana", "'Segoe UI'", "Tahoma", "sans-serif"],
+      },
     },
-  ],
+  },
+  plugins: [],
 };

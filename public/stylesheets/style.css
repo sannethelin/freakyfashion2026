@@ -1,3 +1,15 @@
-@tailwind base;
+@tailwing base;
 @tailwind components;
 @tailwind utilities;
+
+
+  
+  li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .done {
+    text-decoration: line-through;
+    color: lightgray;
+  }
+  
