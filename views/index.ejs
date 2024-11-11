@@ -240,34 +240,36 @@
       </ul>
     </nav>
     
+
+    <!-- Accordion gjord med hjälp av Chat Gpt -->
     <div class="block sm:hidden" x-data="{ openAccordion: 1 }">
-      <div class="border-b">
+      <div class="">
           <h2>
               <button @click="openAccordion === 1 ? openAccordion = 0 : openAccordion = 1"
-                  class="w-full text-left px-4 py-2 bg-gray-200">
+                  class="w-full text-left px-4 py-2 bg-blue-200">
                   Shopping
               </button>
           </h2>
-          <div x-show="openAccordion === 1" class="px-4 py-2">
-              <ul class="space-y-1">
-                  <li><a href="#">Trenchcoats</a></li>
-                  <li><a href="#">Kappa</a></li>
-                  <li><a href="#">Pufferjackor</a></li>
-                  <li><a href="#">Vinterjackor</a></li>
+          <div x-show="openAccordion === 1" class="">
+              <ul class="list-none">
+                  <li><a href="#" class="text-black no-underline">Trenchcoats</a></li>
+                  <li><a href="#" class="text-black no-underline">Kappa</a></li>
+                  <li><a href="#" class="text-black no-underline">Pufferjackor</a></li>
+                  <li><a href="#" class="text-black no-underline" >Vinterjackor</a></li>
               </ul>
           </div>
       </div>
-      <div class="border-b">
+      <div class="">
           <h2>
               <button @click="openAccordion === 2 ? openAccordion = 0 : openAccordion = 2"
                   class="w-full text-left px-4 py-2 bg-gray-200">
                   Mina sidor
               </button>
           </h2>
-          <div x-show="openAccordion === 2" class="px-4 py-2">
-              <ul class="space-y-1">
-                  <li><a href="#">Mina ordrar</a></li>
-                  <li><a href="#">Mitt konto</a></li>
+          <div x-show="openAccordion === 2" class="">
+              <ul class="list-none">
+                  <li><a href="#" class="text-black no-underline">Mina ordrar</a></li>
+                  <li><a href="#" class="text-black no-underline">Mitt konto</a></li>
               </ul>
           </div>
       </div>
@@ -278,10 +280,10 @@
                   Kundtjänst
               </button>
           </h2>
-          <div x-show="openAccordion === 3" class="px-4 py-2">
-              <ul class="space-y-1">
-                  <li><a href="#">Returpolicy</a></li>
-                  <li><a href="#">Integritetspolicy</a></li>
+          <div x-show="openAccordion === 3" class="">
+              <ul class="list-none">
+                  <li><a href="#" class="text-black no-underline">Returpolicy</a></li>
+                  <li><a href="#" class="text-black no-underline">Integritetspolicy</a></li>
               </ul>
           </div>
       </div>

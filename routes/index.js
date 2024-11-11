@@ -104,3 +104,12 @@ router.get('/productdetails/:id', function(req, res, next) {
     res.render('productdetails', viewData);
   });
 });
+
+
+// registrera en produkt
+
+app.get ("/add-product", function (req,res) {
+  res.render ("add-product",{
+  title: "Lägg till produkt"
+  });
+});
