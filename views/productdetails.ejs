@@ -3,7 +3,7 @@
 
 <head>
   <title>
-    <%= title %>
+    <%= product.productName %>
   </title>
 
   <link rel='stylesheet' href='/stylesheets/output.css' />
@@ -17,7 +17,7 @@
 <body class="font-serif">
     <header class="w-full flex items-center flex-wrap sm:flex-nowrap p-2">
         
-        <a href="#">
+        <a href="/">
             <img src="/images/FreakyFashionLogo.png" alt="Freaky Fashion Logotyp"
             class="w-full sm:w-80 lg:w-96 m-1 mr-5">
         </a> 
@@ -54,66 +54,31 @@
 </nav>
 
     <main>
-      <!--  <div class="productdetails flex flex-col sm:flex-row mx-2">
-            
-                <img src="images/black_tshirt.png" alt="Svart tshirt" class="produktbild w-full sm:w-96 h-auto rounded">
-            
-            <div class="produkt flex flex-col p-4">
+        <div class="productdetails flex flex-col sm:flex-row mx-2">
+            <!-- Produktbild -->
+            <img src="<%= product.productpicture %>" alt="<%= product.productName %>" class="produktbild w-full h-auto rounded-lg">
+             <div class="produkt flex flex-col p-4">
+                <!-- Produktnamn -->
                 <div class="produktinfo mb-2">
-                    <h2 class="text-lg font-bold">Svart T-shirt</h2>
+                    <h2 class="text-lg font-bold"><%= product.productName %></h2>
                 </div>
+        
+                <!-- Varumärke -->
                 <div class="varumarke text-sm text-gray-600">
-                    Levis
+                    <%= product.brand %>
                 </div>
                 <div class="produktbeskrivning text-xs text-gray-500 my-2 sm:w-64">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates esse voluptas veritatis, vel
-                    libero vitae cum at placeat autem, repellendus quod accusantium aliquam amet nobis quis
-                    praesentium assumenda reiciendis fugit alias tenetur saepe, impedit beatae blanditiis
-                    voluptatum. Suscipit, vitae doloribus?
+                    <%= product.description %> 
                 </div>
                 <div class="pris text-lg font-bold">
-                    199:-
+                    <%= product.price %> SEK
                 </div>
-                
                 <button type="button" class="w-full sm:w-[200px] border border-black rounded-lg bg-white py-2 mt-2">
                     Lägg i varukorgen
                 </button>
-                
             </div>
-        </div> -->
-    
-
-            <% 
-              // Hitta produkten med articleNumber = 2
-              const product = products.find(p => p.articleNumber === 4); 
-            %>
-            <% if (product) { %>  <!-- Kontrollera att produkten finns -->
-              <div class="produktkort flex flex-col sm:flex-row items-center sm:items-start sm:space-x-6 ml-12 ">
-                
-                <!-- Bild på produkten-->
-                <div class="produktbild-container w-full max-w-[400px]">
-                  <img src="/<%= product.productpicture %>" alt="Produktbild på tshirt" class="produktbild w-full h-auto rounded-lg">
-                </div>
-          
-                <!-- Produktinfo och beskrivning -->
-                <div class="produktinfo flex flex-col sm:ml-6 w-full sm:w-1/2">
-                  <h2 class="text-lg font-semibold mt-2 sm:mt-0"><%= product.productName %></h2>
-                  <div class="varumarke text-xs text-black font-light mt-1"><%= product.brand %></div>
-                  <span class="pris text-lg font-bold mt-2"><%= product.price %> SEK</span>
-                  <div class="produktbeskrivning text-xs text-gray-500 my-2 sm:w-64 mt-4 sm:mt-2"><%= product.description %></div>
-          
-                  <!-- Lägg i varukorgen-knapp -->
-                  <button type="button" class="w-full sm:w-[200px] border border-black rounded-lg bg-white py-2 mt-2">
-                    Lägg i varukorgen
-                  </button>
-                </div>
-              </div>
-            <% } else { %>
-              <p>Produkten finns inte.</p>
-            <% } %>
-          </div>
-          
-            
+        </div>
+        
         
           
         
@@ -167,7 +132,7 @@
             </div>
         </div>
         
-        <script src="script.js"></script>
+       
         <script>
             let currentIndex = 0;
         
@@ -225,7 +190,7 @@
 </div>
 
 
-
+         
     </main>
 
     <footer>

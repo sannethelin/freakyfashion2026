@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="/db/utilities/add-product.js" defer></script>
+    <script src="/js/new-product.js" defer></script>
 </head>
 
 <body class="font-serif">
     <div class="bg-gray-800 text-white text-lg p-2">Administration</div>
     
     <div class="flex p-0">
-        <aside class="w-1/6 bg-gray-300 border border-black p-4">
+        <aside class="w-[200px] bg-gray-300 border border-black p-4">
             <ul class="list-none p-0">
                 <li class="text-black">Produkter</li>
             </ul>
@@ -23,15 +23,17 @@
             <div class="products mb-5">
                 <h3 class="text-xl">Ny produkt</h3>
             </div>
-            <form id="new-product-form" class="space-y-4">
+            
+            <form id="new-product-form" action="/add-product" method="POST" class="space-y-4">
+
                 <div>
-                    <label for="articlenr" class="block">Artikelnr</label>
-                    <input type="number" id="Articlenr" name="Articlenr" placeholder="Ange artikelnummer" required maxlength="50" class="border border-gray-400 p-2 w-full">
+                    <label for="articleNumber" class="block">Artikelnr</label>
+                    <input type="number" id="articleNumber" name="Articlenr" placeholder="Ange artikelnummer" required maxlength="50" class="border border-gray-400 p-2 w-full">
                 </div>
 
                 <div>
                     <label for="productname" class="block">Namn</label>
-                    <input type="text" id="productname" name="productname" placeholder="Ange namn" required maxlength="50" class="border border-gray-400 p-2 w-full">
+                    <input type="text" id="productName" name="productname" placeholder="Ange namn" required maxlength="50" class="border border-gray-400 p-2 w-full">
                 </div>
 
                 <div>
@@ -40,13 +42,13 @@
                 </div>
 
                 <div>
-                    <label for="productpicture" class="block">Bild</label>
-                    <input type="file" id="productpicture" name="productpicture" accept="image/png, image/jpeg" required class="pt-2 w-full">
+                    <label for="productpicture" class="block">Bild (URL)</label>
+                    <input type="text" id="productPicture" name="productpicture" accept="image/png, image/jpeg" class="border border-gray-400 p-2 w-full">
                 </div>
 
                 <div>
                     <label for="sku" class="block">SKU</label>
-                    <input type="text" id="sku" name="sku" pattern="[A-Za-z]{3}[0-9]{3}" placeholder="Ange SKU" class="border border-gray-400 p-2 w-full">
+                    <input type="text" id="sku" name="sku" pattern="[A-Za-z]{3}[0-9]{3}" placeholder="Ange SKU (AAA000)" class="border border-gray-400 p-2 w-full">
                 </div>
 
                 <div>
