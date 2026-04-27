@@ -1,0 +1,67 @@
+<header class="w-full p-2">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full">
+  
+      <!-- LOGO -->
+      <a href="/" class="flex justify-center sm:justify-start">
+        <img
+          src="/images/FreakyFashionLogo.png"
+          alt="Freaky Fashion Logotyp"
+          class="h-auto w-full sm:w-[300px]">
+      </a>
+
+  
+      <!-- SÖK -->
+         <div class="w-full sm:flex-1 flex justify-start sm:justify-center mt-2 sm:mt-0">
+
+        <form action="/search" method="get"
+              class="w-full sm:w-[150px] flex items-center">
+
+          <div class="relative flex items-center w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                 fill="currentColor"
+                 class="bi bi-search absolute left-2"
+                 viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+            </svg>
+
+            <input type="text"
+                   id="search"
+                   name="query"
+                   placeholder="Sök produkt"
+                   class="w-full pl-8 h-8 border rounded-lg">
+          </div>
+
+        </form>
+
+          <!-- IKONER hjärta kundkorg-->
+      <div class="flex justify-end items-center flex-wrap w-full sm:w-auto sm:ml-auto pl-10">
+        <a href="#">
+          <img src="/images/heartfull.png"
+               alt="Ifyllt hjärta"
+               class="pl-4 transition-transform duration-300 transform w-6 h-6 hover:w-8 hover:h-8">
+        </a>
+  
+        <a href="/checkout">
+          <img src="/images/basket.png"
+               alt="Kundkorg"
+               class="pl-4 pr-6 transition-transform duration-300 transform w-6 h-6 hover:w-8 hover:h-8">
+        </a>
+      </div>
+
+      </div>
+
+
+    </div>
+  
+    <!-- Toppmenyn -->
+    <nav class="flex flex-col sm:flex-row w-full mt-2 mb-8">
+  
+      <% menu.forEach(item => { %>
+        <a href="<%= item.link %>" class="text-black no-underline pr-4 hover:underline">
+          <%= item.name %>
+        </a>
+      <% }) %>
+    </nav>
+  
+</header>

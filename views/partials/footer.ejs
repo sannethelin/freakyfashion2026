@@ -1,0 +1,105 @@
+<footer>
+    <div class="services">
+        <ul class="grid grid-cols-1 gap-2 mt-5 sm:grid-cols-2 lg:grid-cols-4 px-10">
+            <li class="flex items-center list-none whitespace-nowrap">
+                <img src="/images/ikon1.png" alt="Gratis frakt och returer" class="w-6 h-6 mr-4">
+                Gratis frakt och returer
+            </li>
+            <li class="flex items-center list-none">
+                <img src="/images/ikon2.png" alt="Expressfrakt" class="w-6 h-6 mr-4">
+                Expressfrakt
+            </li>
+            <li class="flex items-center list-none">
+                <img src="/images/ikon3.png" alt="Säkra betalningar" class="w-6 h-6 mr-4">
+                Säkra betalningar
+            </li>
+            <li class="flex items-center list-none">
+                <img src="/images/ikon4.png" alt="Nyheter varje dag" class="w-6 h-6 mr-4">
+                Nyheter varje dag
+            </li>
+        </ul>
+    </div>
+    <!-- Footer menyn (Visas på större skärmar) -->
+    <nav class="footer_meny hidden sm:block bg-gray-200 border border-black p-4">
+      <ul class="list-none grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <li>
+          <h2 class="text-xl font-bold mb-2">Shopping</h2>
+          <ul class="list-none flex flex-col p-0">
+            <li><a href="#" class="text-black no-underline hover:underline">Trenchcoats</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Kappa</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Pufferjackor</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Vinterjackor</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="text-xl font-bold mb-2">Mina sidor</h2>
+          <ul class="list-none flex flex-col p-0">
+            <li><a href="#" class="text-black no-underline hover:underline">Mina ordrar</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Mitt konto</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="text-xl font-bold mb-2">Kundtjänst</h2>
+          <ul class="list-none flex flex-col p-0">
+            <li><a href="#" class="text-black no-underline hover:underline">Returpolicy</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Integritetspolicy</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    
+
+    <!-- Accordion gjord med hjälp av Chat Gpt Visas på mobilskärm -->
+    <div class="block sm:hidden" x-data="{ openAccordion: 1 }">
+      <div>
+          <h2>
+              <button @click="openAccordion === 1 ? openAccordion = 0 : openAccordion = 1"
+                  class="w-full text-left px-4 py-2 bg-blue-200 font-bold">
+                  Shopping
+              </button>
+          </h2>
+          <div x-show="openAccordion === 1">
+              <ul class="list-none">
+                  <li><a href="#" class="text-black no-underline">Trenchcoats</a></li>
+                  <li><a href="#" class="text-black no-underline">Kappa</a></li>
+                  <li><a href="#" class="text-black no-underline">Pufferjackor</a></li>
+                  <li><a href="#" class="text-black no-underline" >Vinterjackor</a></li>
+              </ul>
+          </div>
+      </div>
+      <div >
+          <h2>
+              <button @click="openAccordion === 2 ? openAccordion = 0 : openAccordion = 2"
+                  class="w-full text-left px-4 py-2 bg-gray-200 font-bold">
+                  Mina sidor
+              </button>
+          </h2>
+          <div x-show="openAccordion === 2">
+              <ul class="list-none">
+                  <li><a href="#" class="text-black no-underline">Mina ordrar</a></li>
+                  <li><a href="#" class="text-black no-underline">Mitt konto</a></li>
+              </ul>
+          </div>
+      </div>
+      <div>
+          <h2>
+              <button @click="openAccordion === 3 ? openAccordion = 0 : openAccordion = 3"
+                  class="w-full text-left px-4 py-2 bg-gray-200 font-bold">
+                  Kundtjänst
+              </button>
+          </h2>
+          <div x-show="openAccordion === 3">
+              <ul class="list-none">
+                  <li><a href="#" class="text-black no-underline">Returpolicy</a></li>
+                  <li><a href="#" class="text-black no-underline">Integritetspolicy</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+ 
+  </footer>

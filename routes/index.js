@@ -5,98 +5,132 @@ const express = require('express'); // För Express-frameworket
 const router = express.Router(); // Skapar en Express-router
 const addProduct = require("../db/utilities/add-product"); // Importerar funktionen för att lägga till en produkt i databasen
 
-// Definiera sökvägen till databasen
+
 const dbPath = path.join(__dirname, '../db/utilities/freakyfashion.db');
-console.log("Databasväg:", dbPath);
 
-// Serva statiska filer från "public" mappen
-router.use(express.static(path.join(__dirname, 'public')));
-
-// Länka till startsidan "/index" och rendera vyn 'index.ejs'
-router.get('/index', function(req, res, next) {
-  res.render('index', { title: 'Freakyfashion' });
+// Öppna sökvägen till databasen 
+const db = new sqlite3.Database(dbPath, (err) => {
+  if (err) {
+    console.error("Kunde inte ansluta till databasen:", err.message);
+  } else {
+    console.log("Databas ansluten");
+  }
 });
 
+// STARTSIDA INDEX
 
-// Länka till checkout-sidan "/checkout" och rendera vyn 'checkout.ejs'
+const menu = [
+  { name: "Nyheter", link: "/nyheter" },
+  { name: "Topplistan", link: "/top" },
+  { name: "Rea", link: "/rea" },
+  { name: "Kampanjer", link: "/kampanjer" }
+];
+
+router.get('/', function(req, res) {
+    const query = 'SELECT * FROM Products LIMIT 8';
+
+    db.all(query, (err, products) => {
+      if (err) {
+        console.error('Kunde inte hämta produkter:', err.message);
+        return res.status(500).send("Error fetching products.");
+      }
+  
+      res.render('index', { 
+        title: 'Freaky Fashion', 
+        products: products,
+        menu: menu
+      });
+    });
+  });
+
+router.get('/nyheter', function(req, res) {
+  res.render('index', { title: 'Nyheter', menu });
+});
+
+router.get('/top', function(req, res) {
+  res.render('index', { title: 'Topplistan', menu });
+});
+
+router.get('/rea', function(req, res) {
+  res.render('index', { title: 'Rea', menu });
+});
+
+router.get('/kampanjer', function(req, res) {
+  res.render('index', { title: 'Kampanjer', menu });
+});
+
 router.get('/checkout', function(req, res, next) {
   res.render('checkout', { title: 'Kassa' });
 });
 
-// Länka till admin-produktens sida "/admin/products/product" och rendera vyn 'admin/products/product.ejs'
-router.get('/admin/products/product', function(req, res) {
-  res.render('admin/products/product', { title: 'Products' });
+router.get('/admin/products/index', function(req, res) {
+  res.render('admin/products/index', { title: 'Products' });
 });
 
-// Länka till sidan för att lägga till nya produkter "/admin/products/new" och rendera vyn 'admin/products/new.ejs'
-router.get('/admin/products/new', function(req, res) {
-  res.render('admin/products/new', { title: 'New Product' });
+router.get('/admin/products/newproduct', function(req, res) {
+  res.render('admin/products/newproduct', { title: 'New Product' });
+});
+router.get('/admin/products/newcategory', function(req, res) {
+  res.render('admin/products/newcategory', { title: 'New Product' });
 });
 
-// GET / - Hämta alla produkter och rendera dem på startsidan
-router.get('/', function(req, res, next) {
-  const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READONLY, (err) => {
-    if (err) {
-      console.error('Kunde inte ansluta till databasen:', err.message);
-      return res.status(500).send("Database connection error.");
-    }
-  });
-
-  const query = 'SELECT * FROM Products LIMIT 8';
-  db.all(query, [], (err, products) => {
-    if (err) {
-      console.error('Kunde inte hämta produkter:', err.message);
-      return res.status(500).send("Error fetching products.");
-    }
-
-    db.close(); // Stäng databasen när frågan är klar
-    res.render('index', { title: 'Freaky Fashion', products: products });
-  });
+router.get('/admin/products/categories', function(req, res) {
+  res.render('admin/products/categories', { title: 'Kategorier' });
 });
 
-// GET /productdetails/:id - Visa detaljer för en specifik produkt baserat på artikelnummer
+
+
+// GET /productdetails/:id 
 router.get('/productdetails/:id', function(req, res, next) {
-  const productId = req.params.id; // Hämta produktens artikelnummer från URL:en
-
-  const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READONLY, (err) => {
-    if (err) {
-      console.error('Kunde inte ansluta till databasen:', err.message);
-      return res.status(500).send("Database connection error.");
-    }
-  });
+  
+  const productId = req.params.id; 
 
   const query = 'SELECT * FROM Products WHERE articleNumber = ?';
+
   db.get(query, [productId], (err, product) => {
+
     if (err) {
       console.error('Kunde inte hämta produkten:', err.message);
       return res.status(500).send("Error fetching product details.");
     }
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
 
-    db.close(); // Stäng databasen när frågan är klar
+    const popularQuery = 'SELECT * FROM Products WHERE articleNumber != ? LIMIT 4';
+    
+    db.all(popularQuery, [productId], (err, popularProducts) => {
+      if (err) {
+        console.error('Kunde inte hämta populära produkter:', err.message);
+        return res.status(500).send("Error fetching popular products.");
+      }
 
-    // den enskilda produkten till EJS-vyn
-    res.render('productdetails', { title: 'Produktdetaljer', product: product });
+      res.render('productdetails', { 
+        title: 'Produktdetaljer', 
+        product: product,
+        popularProducts: popularProducts,
+        menu: menu
+      });
+    });
   });
 });
 
-
-// POST /add-product - Lägg till en ny produkt i databasen
+// POST - Lägg till en ny produkt i databasen
 router.post("/add-product", async (req, res) => {
   const { articleNumber, productName, description, productPicture, sku, brand, price, date } = req.body;
 
   try {
     const productId = await addProduct(articleNumber, productName, description, productPicture, sku, brand, price, date);
-    res.status(200).json({ message: "Produkt tillagd!", productId }); // Skicka ett svar med produktens ID
+    res.status(200).json({ message: "Produkt tillagd!", productId }); 
   } catch (error) {
     console.error("Fel vid produktläggning:", error);
-    res.status(500).json({ error: "Fel vid produktläggning" }); // Hantera fel och skicka ett felmeddelande
+    res.status(500).json({ error: "Fel vid produktläggning" });
   }
 });
 
-const productsRouter = require('./products'); // Importera products.js-rutten
+const productsRouter = require('./products'); 
 
-// Använd router för produkter
 router.use('/api/products', productsRouter); 
 
-// Använd API-rutter
+
 module.exports = router;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= title %>
+
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="/js/products.js" defer></script>
 </head>
@@ -15,7 +15,8 @@
     <div class="flex p-0">
         <aside class="w-1/6 bg-gray-300 border border-black h-screen p-4">
             <ul class="list-none p-0">
-                <li class="text-black">Produkter</li>
+                <li><a href="/admin/products/index" class="text-black no-underline hover:underline">Produkter</a></li>
+                <li><a href="/admin/products/categories" class="text-black no-underline hover:underline">Kategorier</a></li>
             </ul>
         </aside>
         <main class="flex-1 p-4">
