@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             date: formData.get("date"),
         };
 
-        fetch("/add-product", {
+        fetch("/api/products/add-product", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

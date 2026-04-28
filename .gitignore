@@ -61,3 +61,8 @@ typings/
 .next
 
 public/stylesheets/output.css
+
+node_modules/
+data/*.db
+*.db
+.DS_Store

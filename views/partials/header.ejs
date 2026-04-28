@@ -57,11 +57,14 @@
     <!-- Toppmenyn -->
     <nav class="flex flex-col sm:flex-row w-full mt-2 mb-8">
   
-      <% menu.forEach(item => { %>
-        <a href="<%= item.link %>" class="text-black no-underline pr-4 hover:underline">
-          <%= item.name %>
-        </a>
-      <% }) %>
+
+<%= menu[0].name%>      
+
+<% if (menu && menu.length) { %>
+  <% menu.forEach(item => { %>
+    <a href="<%= item.link %>"><%= item.name %></a>
+  <% }) %>
+<% } %>
     </nav>
   
 </header>

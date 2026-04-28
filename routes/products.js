@@ -1,29 +1,14 @@
-
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/utilities/freakyfashion.db');
 
-//för att lägga till
-router.post("/", (req, res) => {
-  console.log(req.body);
+const productsController = require("../controllers/productsController");
 
-  res.status(200).json({
-    message: "Produkt tillagd!",
-    data: req.body
-  });
-});
+// GET hämta produktdetaljer
+router.get("/productDetails/:id", productsController.getProductDetails);
+
+// POST lägg till produkt
+router.post("/addProduct", productsController.addProduct);
 
 
-// för att hämta från databas
-router.get('/', (req, res) => {
-  db.all('SELECT * FROM Products', (err, rows) => { 
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(rows); 
-  });
-});
 
-//för att exportera routes
 module.exports = router;
