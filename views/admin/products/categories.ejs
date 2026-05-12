@@ -1,53 +1,29 @@
-<!DOCTYPE html>
-<html lang="sv">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="/js/products.js" defer></script>
-</head>
-
-<body class="font-serif">
-    <div class="bg-gray-800 text-white text-lg p-2">Administration</div>
-    
-    <div class="flex p-0">
-        <aside class="w-1/6 bg-gray-300 border border-black h-screen p-4">
-            <ul class="list-none p-0">
-                <li><a href="/admin/products/index" class="text-black no-underline hover:underline">Produkter</a></li>
-                <li><a href="/admin/products/categories" class="text-black no-underline hover:underline">Kategorier</a></li>
-            </ul>
-        </aside>
-        <main class="flex-1 p-4">
+<main>    <div class="flex-1 p-4">
             <!-- Rubrik och knappar -->
             <div class="flex justify-between items-center mb-5">
-                <h2 class="text-xl">Produkter</h2>
+                <h2 class="text-xl">Kategorier</h2>
                 <div class="flex space-x-2">
-                    
-                <button id="loadProductsBtn" class="border border-black bg-white p-2 text-black rounded">Ladda produkter</button>
             
-                <a href="/admin/products/new" class="border border-black p-2 text-black rounded">Ny produkt</a>
+                <a href="/admin/products/newcategory" class="border border-black p-2 text-black rounded">Ny kategori</a>
                 </div>
             </div>
-        
-            <!-- Tabell -->
-            <table id="productTable" class="w-full table-auto">
-                <thead class="bg-white text-left">
-                  <tr>
-                    <th class="border border-black bg-gray-300 p-2">Produktnamn</th>
-                    <th class="border border-black bg-gray-300 p-2">Beskrivning</th>
-                    <th class="border border-black bg-gray-300 p-2">Pris</th>
-                  </tr>
-                </thead>
-                <tbody id="productlist">
-                  <!-- Produkter kommer att läggas till här -->
-                </tbody>
-              </table>
-       
-        </main>
-        
-    </div>
-</body>
+    
+ <!-- Tabell -->
+    <table id="productTable" class="w-full table-fixed ">
+        <thead class="bg-white text-left">
+            <tr>
+                <th class="w-1/2 border border-black bg-gray-300 p-2">Produktnamn</th>
+            </tr>
+        </thead>
+        <tbody id="productlist">
+            <% categories.forEach(category=> { %>
+                <tr>
+                    <td class="border border-black p-2">
+                        <%= category.name %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
 
-</html>
+</main>

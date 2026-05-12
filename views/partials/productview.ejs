@@ -1,0 +1,35 @@
+ <!-- Produkter från databasen -->
+    <div class="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <% products.forEach(product=> { %>
+        <div class="produktkort flex flex-col items-center">
+          <a href="/product/<%= product.articleNumber %>" class="no-underline">
+            <div class="produktbild-container relative w-full">
+
+              <img src="<%= product.productPicture %>" alt="Produktbild på tshirt"
+                class="produktbild w-full h-auto rounded-lg">
+              <div class="ikon-container absolute bottom-2 right-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-heart-fill absolute text-black bottom-2 right-4 transition-transform duration-300 ease-in-out hover:text-red-500 w-6 h-6 hover:w-8 hover:h-8"
+                  viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+                </svg>
+              </div>
+            </div>
+            <div class="produktinfo flex justify-between text-black">
+              <h2 class="text-sm font-semibold mt-0">
+                <%= product.productName %>
+              </h2>
+              <span class="text-sm">
+                <%= product.price %> SEK
+              </span>
+            </div>
+            <div class="varumarke text-xs text-black font-light -mt-3">
+              <%= product.brand %>
+            </div>
+          </a>
+        </div>
+        <% }); %>
+
+
+    </div>

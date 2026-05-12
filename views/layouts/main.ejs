@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/stylesheets/output.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="font-serif">
+
+  <header class="w-full p-2">
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full">
+
+      <!-- LOGO -->
+      <a href="/" class="flex flex-row justify-center sm:justify-start sm:flex-1 min-w-0">
+        <img src="/images/FreakyFashionLogo.png" alt="Freaky Fashion Logotyp" class="h-auto w-full max-w-full">
+      </a>
+
+      <!-- RIGHT SIDE (SÖK + IKONER) -->
+      <div class="flex flex-row items-center w-full sm:flex-[2] mt-2 sm:mt-0 gap-3 min-w-0">
+
+        <!-- SÖK -->
+        <form action="/search" method="get" class="flex flex-1 items-center">
+
+          <div class="relative flex items-center w-full">
+            <input type="text" name="query" placeholder="Sök produkt" class="w-full pl-4 h-6 border rounded-lg">
+          </div>
+        </form>
+
+        <!-- IKONER -->
+        <div class="flex items-center gap-4 ml-4 sm:ml-6 shrink-0 pr-6">
+
+          <a href="#">
+            <img src="/images/heartfull.png" class="w-6 h-6 hover:scale-110 transition">
+          </a>
+
+          <a href="/checkout">
+            <img src="/images/basket.png" class="w-6 h-6 hover:scale-110 transition">
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- NAV -->
+    <nav class="flex flex-col sm:flex-row w-full mt-4 mb-8">
+
+      <% if (menu && menu.length) { %>
+        <% menu.forEach(item=> { %>
+          <a href="<%= item.link %>" class="no-underline pr-4 text-black">
+            <%= item.name %>
+          </a>
+          <% }) %>
+            <% } %>
+
+    </nav>
+
+  </header>
+  <main>
+    <%- body %>
+  </main>
+
+  <footer>
+    <div class="services">
+      <ul class="grid grid-cols-1 gap-2 mt-5 sm:grid-cols-2 lg:grid-cols-4 px-10">
+        <li class="flex items-center list-none whitespace-nowrap">
+          <img src="/images/ikon1.png" alt="Gratis frakt och returer" class="w-6 h-6 mr-4">
+          Gratis frakt och returer
+        </li>
+        <li class="flex items-center list-none">
+          <img src="/images/ikon2.png" alt="Expressfrakt" class="w-6 h-6 mr-4">
+          Expressfrakt
+        </li>
+        <li class="flex items-center list-none">
+          <img src="/images/ikon3.png" alt="Säkra betalningar" class="w-6 h-6 mr-4">
+          Säkra betalningar
+        </li>
+        <li class="flex items-center list-none">
+          <img src="/images/ikon4.png" alt="Nyheter varje dag" class="w-6 h-6 mr-4">
+          Nyheter varje dag
+        </li>
+      </ul>
+    </div>
+    <!-- Footer menyn (Visas på större skärmar) -->
+    <nav class="footer_meny hidden sm:block bg-gray-200 border border-black p-4">
+      <ul class="list-none grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <li>
+          <h2 class="text-xl font-bold mb-2">Shopping</h2>
+          <ul class="list-none flex flex-col p-0">
+            <li><a href="#" class="text-black no-underline hover:underline">Trenchcoats</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Kappa</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Pufferjackor</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Vinterjackor</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="text-xl font-bold mb-2">Mina sidor</h2>
+          <ul class="list-none flex flex-col p-0">
+            <li><a href="#" class="text-black no-underline hover:underline">Mina ordrar</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Mitt konto</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="text-xl font-bold mb-2">Kundtjänst</h2>
+          <ul class="list-none flex flex-col p-0">
+            <li><a href="#" class="text-black no-underline hover:underline">Returpolicy</a></li>
+            <li><a href="#" class="text-black no-underline hover:underline">Integritetspolicy</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+
+    <!-- Accordion gjord med hjälp av Chat Gpt Visas på mobilskärm -->
+    <div class="block sm:hidden" x-data="{ openAccordion: 1 }">
+      <div>
+        <h2>
+          <button @click="openAccordion === 1 ? openAccordion = 0 : openAccordion = 1"
+            class="w-full text-left px-4 py-2 bg-blue-200 font-bold">
+            Shopping
+          </button>
+        </h2>
+        <div x-show="openAccordion === 1">
+          <ul class="list-none">
+            <li><a href="#" class="text-black no-underline">Trenchcoats</a></li>
+            <li><a href="#" class="text-black no-underline">Kappa</a></li>
+            <li><a href="#" class="text-black no-underline">Pufferjackor</a></li>
+            <li><a href="#" class="text-black no-underline">Vinterjackor</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h2>
+          <button @click="openAccordion === 2 ? openAccordion = 0 : openAccordion = 2"
+            class="w-full text-left px-4 py-2 bg-gray-200 font-bold">
+            Mina sidor
+          </button>
+        </h2>
+        <div x-show="openAccordion === 2">
+          <ul class="list-none">
+            <li><a href="#" class="text-black no-underline">Mina ordrar</a></li>
+            <li><a href="#" class="text-black no-underline">Mitt konto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h2>
+          <button @click="openAccordion === 3 ? openAccordion = 0 : openAccordion = 3"
+            class="w-full text-left px-4 py-2 bg-gray-200 font-bold">
+            Kundtjänst
+          </button>
+        </h2>
+        <div x-show="openAccordion === 3">
+          <ul class="list-none">
+            <li><a href="#" class="text-black no-underline">Returpolicy</a></li>
+            <li><a href="#" class="text-black no-underline">Integritetspolicy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+  </footer>
+
+</body>
+
+</html>

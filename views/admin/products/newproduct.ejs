@@ -1,105 +1,71 @@
-<!DOCTYPE html>
-<html lang="sv">
+<main>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="/js/newProduct.js" defer></script>
-</head>
+    <div class="p-4">
 
-<body class="font-serif">
-    <div class="bg-gray-800 text-white text-lg p-2">Administration</div>
-    
-    <div class="flex p-0">
-        <aside class="w-[200px] bg-gray-300 border border-black p-4">
-            <ul class="list-none p-0">
-                <li><a href="/admin/products/index" class="text-black no-underline hover:underline">Produkter</a></li>
-                <li><a href="/admin/products/categories" class="text-black no-underline hover:underline">Kategorier</a></li>     </ul>
-        </aside>
-        
-        <main class="p-4">
-            <div class="products mb-5">
-                <h3 class="text-xl">Ny produkt</h3>
+        <div class="products mb-5">
+            <h3 class="text-xl">Ny produkt</h3>
+        </div>
+
+        <form id="new-product-form" action="/add-product" method="POST" enctype="multipart/form-data" class="space-y-4">
+
+            <div>
+                <label for="articleNumber" class="block">Artikelnr</label>
+                <input type="number" id="articleNumber" name="articleNumber" placeholder="Ange artikelnummer" required
+                    maxlength="25" class="border border-gray-400 p-2 w-full">
             </div>
-            
-            <form id="new-product-form" action="/add-product" method="POST" class="space-y-4">
 
-                <div>
-                    <label for="articleNumber" class="block">Artikelnr</label>
-                    <input type="number" id="articleNumber" name="Articlenr" placeholder="Ange artikelnummer" required maxlength="25" class="border border-gray-400 p-2 w-full">
-                </div>
+            <div>
+                <label for="productName" class="block">Namn</label>
+                <input type="text" id="productName" name="productName" placeholder="Ange namn" required maxlength="50"
+                    class="border border-gray-400 p-2 w-full">
+            </div>
 
-                <div>
-                    <label for="productname" class="block">Namn</label>
-                    <input type="text" id="productName" name="productname" placeholder="Ange namn" required maxlength="50" class="border border-gray-400 p-2 w-full">
-                </div>
+            <div>
+                <label for="description" class="block">Beskrivning</label>
+                <textarea id="description" name="description" placeholder="Ange beskrivning" rows="4"
+                    class="border border-gray-400 p-2 w-full"></textarea>
+            </div>
 
-                <div>
-                    <label for="description" class="block">Beskrivning</label>
-                    <textarea id="description" name="description" placeholder="Ange beskrivning" rows="4" class="border border-gray-400 p-2 w-full"></textarea>
-                </div>
+            <div>
+                <label for="productPicture" class="block">Bild (URL)</label>
+                <input type="file" id="productPicture" name="productPicture" accept="image/png, image/jpeg"
+                    class="border border-gray-400 p-2 w-full">
+            </div>
 
-                <div>
-                    <label for="productpicture" class="block">Bild (URL)</label>
-                    <input type="text" id="productPicture" name="productpicture" accept="image/png, image/jpeg" class="border border-gray-400 p-2 w-full">
-                </div>
+            <div>
+                <label for="sku" class="block">SKU</label>
+                <input type="text" id="sku" name="sku" pattern="[A-Za-z]{3}[0-9]{3}" placeholder="Ange SKU (AAA000)"
+                    class="border border-gray-400 p-2 w-full">
+            </div>
 
-                <div>
-                    <label for="sku" class="block">SKU</label>
-                    <input type="text" id="sku" name="sku" pattern="[A-Za-z]{3}[0-9]{3}" placeholder="Ange SKU (AAA000)" class="border border-gray-400 p-2 w-full">
-                </div>
+            <div>
+                <label for="brand" class="block">Märke</label>
+                <input type="text" id="brand" name="brand" placeholder="Ange Märke" required
+                    class="border border-gray-400 p-2 w-full">
+            </div>
 
-                <div>
-                  <label for="brand" class="block">Märke</label>
-                  <input type="text" id="brand" name="brand" placeholder="Ange Märke" required class="border border-gray-400 p-2 w-full">
-              </div>
+            <div>
+                <label for="price" class="block">Pris</label>
+                <input type="number" id="price" name="price" placeholder="Ange pris"
+                    class="border border-gray-400 p-2 w-full">
+            </div>
+            <div class="category">
+                <label for="categoryId" class="block mb-2">Kategori</label>
 
-                <div>
-                    <label for="price" class="block">Pris</label>
-                    <input type="number" id="price" name="price" placeholder="Ange pris"  class="border border-gray-400 p-2 w-full">
-                </div>
+                <select id="categoryId" name="categoryId" required class="border border-gray-400 p-2 w-full">
+                    <option value="">Välj kategori</option>
 
-                <div>
-                    <label for="date" class="block">Publiceringsdatum</label>
-                    <div class="flex items-center">
-                        <input type="date" class="border border-gray-400 p-2 w-36 text-center" id="date" name="date" placeholder="YYYY/MM/DD">
-                     
-                    </div>
-                </div>
+                    <% categories.forEach(category=> { %>
+                        <option value="<%= category.id %>">
+                            <%= category.name %>
+                        </option>
+                        <% }); %>
+                </select>
+            </div>
 
-                <div class="category">
-                    <label class="block mb-2">Kategori</label>
-                    <ul class="list-category">
-                        <li>
-                            <input type="checkbox" id="tshirts">
-                            <label for="tshirts" class="ml-2">T-Shirts</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="sommar">
-                            <label for="sommar" class="ml-2">Sommar</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="byxor">
-                            <label for="byxor" class="ml-2">Byxor</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="skor">
-                            <label for="skor" class="ml-2">Skor</label>
-                        </li>
-                    </ul>
-                </div>
+            <button type="submit" class="addproduct inline-block bg-white text-black border border-black p-2 rounded">
+                Lägg till
+            </button>
 
-                <button type="submit" class="addproduct inline-block bg-white text-black border border-black p-2 rounded">
-                    Lägg till
-                </button>
-                   
-            </form>
-        </main>
-    </div>
-
-
-</body>
-
-</html>
+        </form>
+</main>
