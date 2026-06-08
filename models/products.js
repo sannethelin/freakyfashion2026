@@ -63,7 +63,7 @@ exports.getSimilar = (articleNumber, callback) => {
 
 // Skapa ny produkt och koppla den till en kategori
 exports.create = (data, callback) => {
-  const {protocol=https
+  const {
     articleNumber,
     productName,
     description,
