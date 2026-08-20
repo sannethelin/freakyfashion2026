@@ -1,46 +1,64 @@
-# Freaky Fashion (Projekt, JavaScript 1)
+## Om projektet
 
-Detta är projektarbetet för kursen JavaScript 1, där du bygger e-handelssajten Freaky Fashion.
+Freaky Fashion är ett utbildningsprojekt där jag steg för steg bygger en webbshop
 
-Nodemon är installerat, så att du slipper starta om applikationen varje gång du gör en ändring. Även Tailwind är installerat, om du vill använda dig av detta.
+## Funktioner
 
-Följ instruktionerna nedan för att komma igång.
+- Visa produkter och produktinformation
+- Dynamiska produktsidor
+- Kategorier
+- Sökfunktion
+- Adminsida för produkter
+- Lägga till nya produkter
+- Bilduppladdning
+- Lagring av produkter i SQLite-databas
+
+## Tekniker
+
+- JavaScript
+- Node.js
+- Express
+- EJS
+- SQLite
+- Tailwind CSS
+- Git / GitHub
+
+## Projektstruktur
+
+Projektet är uppdelat i routes, controllers, models och views.
 
 ## Kom igång
 
-1. Klona projektet
+Klona repositoryt:
 
-```
-git clone https://github.com/EVXFEH24/JavaScript1-FreakyFashion.git freakyfashion
-```
-
-2. Öppna projektet i Visual Studio Code
-
-```
-cd freakyfashion
-code .
+```bash
+git clone https://github.com/sannethelin/freakyfashion2026.git
 ```
 
-3. Starta inbyggda terminalen.
+Gå in i projektmappen:
 
-4. Installera beroenden
-
+```bash
+cd freakyfashion2026
 ```
+
+Installera beroenden:
+
+```bash
 npm install
 ```
 
-5. Starta applikationen
+Starta applikationen:
 
-```
+```bash
 npm start
 ```
 
-6. Starta Tailwind watch (valfritt)
+Öppna sedan:
 
-Om du vill använda Tailwind, starta ytterligare en terminal och kör följande kommando för att starta processen som övervakar .ejs-filer i projektet:
+http://localhost:3000
 
-```
+För att köra Tailwind watch:
+
+```bash
 npm run tailwind:watch
 ```
-
-7. Öppna http://localhost:3000.
